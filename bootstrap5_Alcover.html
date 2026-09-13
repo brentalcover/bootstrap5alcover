@@ -1,0 +1,666 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="PicPitik Photography Studio">
+  <title>PicPitik Photography</title>
+  <link rel="stylesheet" href="bootstrap5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="bootstrap5/css/bootstrap-icons.min.css">
+  <style>
+    :root {
+      --bg: #f7f5f2;
+      --card: #ffffff;
+      --text: #1f1f1f;
+      --muted: #5d6470;
+      --primary: #d85d53;
+      --primary-dark: #bc4d43;
+      --accent: #f4cc69;
+      --line: #e8e1d7;
+      --dark-bg: #111827;
+      --dark-card: #1f2937;
+      --shadow: 0 18px 45px rgba(17, 24, 39, 0.08);
+    }
+
+    body[data-theme="dark"] {
+      --bg: #111827;
+      --card: #1f2937;
+      --text: #f3f4f6;
+      --muted: #cbd5e1;
+      --line: #374151;
+      --shadow: 0 18px 45px rgba(0, 0, 0, 0.25);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      transition: all 0.3s ease;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .navbar {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    body[data-theme="dark"] .navbar {
+      background: rgba(17, 24, 39, 0.8);
+    }
+
+    body[data-theme="dark"] .bg-light-subtle {
+      background-color: #172033 !important;
+    }
+
+    body[data-theme="dark"] .text-secondary,
+    body[data-theme="dark"] .text-muted {
+      color: var(--muted) !important;
+    }
+
+    body[data-theme="dark"] main,
+    body[data-theme="dark"] footer,
+    body[data-theme="dark"] .card,
+    body[data-theme="dark"] .feature-box,
+    body[data-theme="dark"] .pricing-card,
+    body[data-theme="dark"] .contact-box,
+    body[data-theme="dark"] .testimonial {
+      color: var(--text);
+    }
+
+    #features {
+      background-color: var(--bg) !important;
+    }
+
+    #testimonials {
+      background-color: var(--bg) !important;
+      color: var(--text);
+    }
+
+    .navbar, .card, .feature-box, .testimonial, .contact-box, .pricing-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .card {
+      border-radius: 1rem;
+      overflow: hidden;
+    }
+
+    #services .card {
+      background-color: var(--card) !important;
+      color: var(--text);
+    }
+
+    #services .card-body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    #services .card h3,
+    #services .card p {
+      color: var(--text);
+    }
+
+    #services .card p.text-secondary {
+      color: var(--muted) !important;
+    }
+
+    #services .card .btn {
+      margin-top: auto;
+    }
+
+    .navbar-brand, .nav-link, .section-title, .sect-title, .price,
+    .card h3, .card p, .feature-box h3, .pricing-card h3 {
+      color: var(--text);
+    }
+
+    .nav-link {
+      font-weight: 600;
+      transition: color 0.2s ease;
+    }
+
+    .nav-link:hover,
+    .nav-link:focus {
+      color: var(--primary);
+    }
+
+    .theme-btn {
+      border: 1px solid var(--line);
+      background: transparent;
+      color: var(--text);
+      transition: all 0.2s ease;
+    }
+
+    .theme-btn:hover {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    .hero {
+      background: linear-gradient(135deg, rgba(216,93,83,0.08), rgba(244,204,105,0.15));
+      padding: 90px 0;
+    }
+
+    body[data-theme="dark"] .hero {
+      background: linear-gradient(135deg, rgba(127, 29, 29, 0.32), rgba(120, 53, 15, 0.22));
+    }
+
+    .hero .display-4 {
+      font-weight: 800;
+      line-height: 1.0;
+      letter-spacing: -0.06em;
+    }
+
+    .hero .text-primary-custom { color: var(--primary); }
+    .sect-title { letter-spacing: -0.04em; }
+    .btn-primary-custom {
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+    .btn-primary-custom:hover {
+      background: var(--primary-dark);
+      border-color: var(--primary-dark);
+    }
+
+    .feature-box, .pricing-card, .testimonial, .contact-box {
+      border-radius: 1rem;
+      padding: 1.75rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .feature-box:hover,
+    .pricing-card:hover,
+    .contact-box:hover {
+      transform: translateY(-4px);
+    }
+
+    .feature-box i, .pricing-card .badge {
+      color: var(--primary);
+    }
+
+    .feature-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      margin-bottom: 1rem;
+      border: 1px solid var(--primary);
+      border-radius: 50%;
+      color: var(--primary);
+      font-size: 1.5rem;
+    }
+
+    .feature-box p,
+    .pricing-card li,
+    .card p.text-secondary {
+      color: var(--muted) !important;
+    }
+
+    .testimonial {
+      background: linear-gradient(135deg, rgba(216,93,83,0.04), rgba(244,204,105,0.07));
+      border-radius: 1.25rem;
+      text-align: center;
+    }
+
+    .testimonial p,
+    .testimonial h3 {
+      color: var(--text);
+    }
+
+    body[data-theme="dark"] .testimonial {
+      background: linear-gradient(135deg, #1f2937, #263244);
+      border-color: #475569;
+    }
+
+    .price {
+      font-size: 2.5rem;
+      font-weight: 800;
+    }
+
+    .price small {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .pricing-card.featured {
+      border: 2px solid var(--primary);
+      transform: translateY(-10px);
+    }
+
+    .form-control, .form-select {
+      background: transparent;
+      border-color: var(--line);
+      color: var(--text);
+    }
+
+    #contact h2,
+    #contact .form-label,
+    #contact strong {
+      color: var(--text);
+    }
+
+    #contact form {
+      margin: 0;
+      max-width: none;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 0.75rem;
+      color: var(--text);
+    }
+
+    .form-control:focus, .form-select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 0.25rem rgba(216,93,83,0.15);
+      color: var(--text);
+      background: transparent;
+    }
+
+    .form-control::placeholder {
+      color: var(--muted);
+      opacity: 1;
+    }
+
+    body[data-theme="dark"] .form-control,
+    body[data-theme="dark"] .form-select {
+      background-color: #111827;
+    }
+
+    body[data-theme="dark"] #contact form {
+      background-color: #1f2937;
+      border-color: #475569;
+    }
+
+    body[data-theme="dark"] .form-select option {
+      background-color: #1f2937;
+      color: var(--text);
+    }
+
+    body[data-theme="dark"] .text-bg-light {
+      background-color: #374151 !important;
+      color: #f3f4f6 !important;
+    }
+
+    .testimonial .stars { color: #f4b400; }
+
+    body[data-theme="dark"] .nav-link {
+      color: #e5e7eb;
+    }
+
+    body[data-theme="dark"] .nav-link:hover,
+    body[data-theme="dark"] .nav-link:focus {
+      color: #fca5a5;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body data-theme="light">
+
+  <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#home"><i class="bi bi-camera-fill text-danger me-2"></i>PicPitik</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-lg-3">
+          <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+          <li class="nav-item"><a class="nav-link" href="#pricing">Pricing</a></li>
+          <li class="nav-item"><a class="nav-link" href="#testimonials">Testimonials</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+        <button id="themeToggle" class="btn theme-btn rounded-pill px-3" type="button">
+          <i class="bi bi-moon-stars-fill me-2"></i>Dark mode
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <header id="home" class="hero">
+    <div class="container">
+      <div class="row align-items-center gy-4">
+        <div class="col-lg-7">
+          <span class="badge bg-danger-subtle text-danger mb-3">CAPTURE EVERY SPECIAL MOMENT</span>
+          <h1 class="display-4 mb-3">Capture your <span class="text-primary-custom">story</span> beautifully.</h1>
+          <p class="lead text-secondary mb-4">PicPitik Photography helps families, students, businesses, and event hosts preserve unforgettable memories with creative, affordable, and friendly photography services.</p>
+          <div class="d-flex gap-3 flex-wrap">
+            <a href="#contact" class="btn btn-primary-custom text-white rounded-pill px-4 py-3">Book a Session</a>
+            <a href="#services" class="btn btn-outline-secondary rounded-pill px-4 py-3">View Services</a>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <img src="images/hero.jpg" alt="Photography" class="img-fluid rounded-4 shadow-lg w-100">
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="about" class="py-5">
+      <div class="container">
+        <div class="text-center mb-5">
+          <span class="text-uppercase text-danger fw-bold small">About us</span>
+          <h2 class="sect-title display-5 mt-2">A studio rooted in meaningful memories</h2>
+        </div>
+        <div class="row g-4">
+          <div class="col-lg-6">
+            <p class="text-secondary">PicPitik is a small photography studio located in Nasugbu, Batangas. We provide photography services for birthdays, graduations, family events, and small businesses.</p>
+            <p class="text-secondary">PicPitik started in 2024 with the goal of helping people save important memories through photographs. We believe every moment is worth remembering.</p>
+          </div>
+          <div class="col-lg-6">
+            <div class="contact-box h-100">
+              <h3 class="h4 mb-3">Our mission</h3>
+              <p class="text-secondary">Our mission is to provide affordable and quality photography services while making customers feel comfortable and happy.</p>
+              <h3 class="h4 mt-4 mb-3">Our vision</h3>
+              <p class="text-secondary">Our vision is to become a trusted photography studio in Nasugbu, Batangas.</p>
+              <p class="mb-0"><strong>Location:</strong> Nasugbu, Batangas</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="py-5 bg-light-subtle">
+      <div class="container">
+        <div class="text-center mb-5">
+          <span class="text-uppercase text-danger fw-bold small">Our services</span>
+          <h2 class="sect-title display-5 mt-2">Photography services for every chapter</h2>
+        </div>
+        <div class="row g-4">
+          <div class="col-md-6 col-lg-3">
+            <div class="card h-100 border-0 shadow-sm">
+              <img src="images/portrait.jpg" class="card-img-top" alt="Portrait Photography" style="height:220px;object-fit:cover;">
+              <div class="card-body">
+                <h3 class="h5">Portrait Photography</h3>
+                <p class="text-secondary">Personal and creative portrait pictures for different occasions. Perfect for family portrait.</p>
+                <p class="fw-bold mb-3">Starting at ₱1,500</p>
+                <a href="#contact" class="btn btn-primary-custom text-white w-100 rounded-pill">Book Now</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="card h-100 border-0 shadow-sm">
+              <img src="images/event.jpg" class="card-img-top" alt="Event Photography" style="height:220px;object-fit:cover;">
+              <div class="card-body">
+                <h3 class="h5">Event Photography</h3>
+                <p class="text-secondary">We capture important moments from birthdays, parties, and other events.</p>
+                <p class="fw-bold mb-3">Starting at ₱3,500</p>
+                <a href="#contact" class="btn btn-primary-custom text-white w-100 rounded-pill">Book Now</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="card h-100 border-0 shadow-sm">
+              <img src="images/graduation.jpg" class="card-img-top" alt="Graduation Photography" style="height:220px;object-fit:cover;">
+              <div class="card-body">
+                <h3 class="h5">Graduation Photography</h3>
+                <p class="text-secondary">Keep your graduation memories with beautiful and memorable photos.</p>
+                <p class="fw-bold mb-3">Starting at ₱2,000</p>
+                <a href="#contact" class="btn btn-primary-custom text-white w-100 rounded-pill">Book Now</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="card h-100 border-0 shadow-sm">
+              <img src="images/product.jpg" class="card-img-top" alt="Product Photography" style="height:220px;object-fit:cover;">
+              <div class="card-body">
+                <h3 class="h5">Product Photography</h3>
+                <p class="text-secondary">Simple and clear product photos for online shops and small businesses.</p>
+                <p class="fw-bold mb-3">Starting at ₱2,500</p>
+                <a href="#contact" class="btn btn-primary-custom text-white w-100 rounded-pill">Book Now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="py-5">
+      <div class="container">
+        <div class="text-center mb-5">
+          <span class="text-uppercase text-danger fw-bold small">Why choose us</span>
+          <h2 class="sect-title display-5 mt-2">Simple, reliable, and memorable</h2>
+        </div>
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="feature-box h-100 text-center">
+              <i class="bi bi-wallet2 feature-icon" aria-hidden="true"></i>
+              <h3>Affordable Prices</h3>
+              <p class="text-secondary mb-0">We offer photography packages at reasonable prices without compromising quality.</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="feature-box h-100 text-center">
+              <i class="bi bi-camera feature-icon" aria-hidden="true"></i>
+              <h3>Quality Photos</h3>
+              <p class="text-secondary mb-0">We make sure your photos are clear, creative, and properly edited for every occasion.</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="feature-box h-100 text-center">
+              <i class="bi bi-heart feature-icon" aria-hidden="true"></i>
+              <h3>Friendly Service</h3>
+              <p class="text-secondary mb-0">We make our customers feel comfortable and happy during every photo session.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing" class="py-5 bg-light-subtle">
+      <div class="container">
+        <div class="text-center mb-5">
+          <span class="text-uppercase text-danger fw-bold small">Pricing</span>
+          <h2 class="sect-title display-5 mt-2">Choose the plan that fits your story</h2>
+        </div>
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="pricing-card h-100">
+              <span class="badge text-bg-light mb-3">Starter</span>
+              <h3>Basic Session</h3>
+              <div class="price">₱1,500 <small>/ session</small></div>
+              <ul class="list-unstyled mt-4 mb-4 text-secondary">
+                <li><i class="bi bi-check-circle-fill text-danger me-2"></i>1 location</li>
+                <li><i class="bi bi-check-circle-fill text-danger me-2"></i>30 edited photos</li>
+                <li><i class="bi bi-check-circle-fill text-danger me-2"></i>1 outfit concept</li>
+              </ul>
+              <a href="#contact" class="btn btn-outline-secondary rounded-pill w-100">Choose Starter</a>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="pricing-card featured h-100">
+              <span class="badge bg-danger mb-3">Most Popular</span>
+              <h3>Pro Session</h3>
+              <div class="price">₱3,500 <small>/ session</small></div>
+              <ul class="list-unstyled mt-4 mb-4 text-secondary">
+                <li><i class="bi bi-check-circle-fill text-danger me-2"></i>2 locations</li>
+                <li><i class="bi bi-check-circle-fill text-danger me-2"></i>80 edited photos</li>
+                <li><i class="bi bi-check-circle-fill text-danger me-2"></i>Professional retouching</li>
+              </ul>
+              <a href="#contact" class="btn btn-primary-custom text-white rounded-pill w-100">Choose Pro</a>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="pricing-card h-100">
+              <span class="badge text-bg-light mb-3">Enterprise</span>
+              <h3>Event Coverage</h3>
+              <div class="price">₱5,000 <small>/ package</small></div>
+              <ul class="list-unstyled mt-4 mb-4 text-secondary">
+                <li><i class="bi bi-check-circle-fill text-danger me-2"></i>Full event coverage</li>
+                <li><i class="bi bi-check-circle-fill text-danger me-2"></i>High-resolution gallery</li>
+                <li><i class="bi bi-check-circle-fill text-danger me-2"></i>Priority editing</li>
+              </ul>
+              <a href="#contact" class="btn btn-outline-secondary rounded-pill w-100">Choose Enterprise</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery" class="py-5 bg-light-subtle">
+      <div class="container">
+        <div class="text-center mb-5">
+          <span class="text-uppercase text-danger fw-bold small">Gallery</span>
+          <h2 class="sect-title display-5 mt-2">A glimpse of our work</h2>
+        </div>
+        <div class="row g-3">
+          <div class="col-md-4"><img src="images/gallery1.jpg" class="img-fluid rounded-4 w-100 h-100" alt="Gallery 1" style="object-fit:cover;min-height:220px;"></div>
+          <div class="col-md-4"><img src="images/gallery2.jpg" class="img-fluid rounded-4 w-100 h-100" alt="Gallery 2" style="object-fit:cover;min-height:220px;"></div>
+          <div class="col-md-4"><img src="images/gallery3.jpg" class="img-fluid rounded-4 w-100 h-100" alt="Gallery 3" style="object-fit:cover;min-height:220px;"></div>
+          <div class="col-md-4"><img src="images/gallery4.jpg" class="img-fluid rounded-4 w-100 h-100" alt="Gallery 4" style="object-fit:cover;min-height:220px;"></div>
+          <div class="col-md-4"><img src="images/gallery5.jpg" class="img-fluid rounded-4 w-100 h-100" alt="Gallery 5" style="object-fit:cover;min-height:220px;"></div>
+          <div class="col-md-4"><img src="images/gallery6.jpg" class="img-fluid rounded-4 w-100 h-100" alt="Gallery 6" style="object-fit:cover;min-height:220px;"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="testimonials" class="py-5">
+      <div class="container">
+        <div class="text-center mb-5">
+          <span class="text-uppercase text-danger fw-bold small">Testimonials</span>
+          <h2 class="sect-title display-5 mt-2">People love the experience</h2>
+        </div>
+
+        <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <div class="testimonial mx-auto" style="max-width:760px;">
+                <p class="fs-4 mb-3">“The service was easy and the pictures looked really nice. I enjoyed my session!”</p>
+                <h3 class="h5 mb-1">Spoti Bai</h3>
+                <div class="stars">★★★★★</div>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <div class="testimonial mx-auto" style="max-width:760px;">
+                <p class="fs-4 mb-3">“The photographer was friendly and the pictures were great. Good service!”</p>
+                <h3 class="h5 mb-1">LeBron James</h3>
+                <div class="stars">★★★★★</div>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <div class="testimonial mx-auto" style="max-width:760px;">
+                <p class="fs-4 mb-3">“I liked the quality of the photos and the service was very friendly.”</p>
+                <h3 class="h5 mb-1">Manny Pacquiao</h3>
+                <div class="stars">★★★★☆</div>
+              </div>
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="py-5 bg-light-subtle">
+      <div class="container">
+        <div class="row align-items-center g-4">
+          <div class="col-lg-5">
+            <span class="text-uppercase text-danger fw-bold small">Contact</span>
+            <h2 class="sect-title display-5 mt-2">Book your next session</h2>
+            <p class="text-secondary">We’d love to help you capture your most important milestones and memories.</p>
+            <ul class="list-unstyled text-secondary">
+              <li><strong>Address:</strong> Nasugbu, Batangas</li>
+              <li><strong>Phone:</strong> 09564784992</li>
+              <li><strong>Email:</strong> brentalcoverr@gmail.com</li>
+              <li><strong>Business Hours:</strong> Monday - Saturday, 9:00 AM - 6:00 PM</li>
+            </ul>
+          </div>
+          <div class="col-lg-7">
+            <div class="contact-box">
+              <form id="contactForm" novalidate>
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label for="fullName" class="form-label">Full Name</label>
+                    <input id="fullName" name="fullName" type="text" class="form-control" required>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="email" class="form-label">Email</label>
+                    <input id="email" name="email" type="email" class="form-control" required>
+                  </div>
+                  <div class="col-12">
+                    <label for="subject" class="form-label">Subject</label>
+                    <input id="subject" name="subject" type="text" class="form-control" required>
+                  </div>
+                  <div class="col-12">
+                    <label for="message" class="form-label">Message</label>
+                    <textarea id="message" name="message" class="form-control" rows="4" required></textarea>
+                  </div>
+                  <div class="col-12">
+                    <button type="submit" class="btn btn-primary-custom text-white rounded-pill px-4 py-3">Send Message</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="py-4">
+    <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3 text-center text-md-start">
+      <div>
+        <strong>PicPitik Photography</strong>
+        <div class="small">Capture your special moments with PicPitik.</div>
+      </div>
+      <div class="small">09564784992 | brentalcoverr@gmail.com</div>
+    </div>
+  </footer>
+
+  <script src="bootstrap5/js/bootstrap.bundle.min.js"></script>
+  <script src="bootstrap5/js/sweetalert2.all.min.js"></script>
+  <script>
+    const body = document.body;
+    const themeToggle = document.getElementById('themeToggle');
+
+    themeToggle.addEventListener('click', function () {
+      const isDark = body.getAttribute('data-theme') === 'dark';
+      body.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      themeToggle.innerHTML = isDark
+        ? '<i class="bi bi-moon-stars-fill me-2"></i>Dark mode'
+        : '<i class="bi bi-sun-fill me-2"></i>Light mode';
+    });
+
+    document.getElementById('contactForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const form = e.currentTarget;
+
+      if (!form.checkValidity()) {
+        form.classList.add('was-validated');
+        Swal.fire({
+          icon: 'warning',
+          title: 'Please complete all fields',
+          text: 'Fill in your name, email, subject, and message.',
+          confirmButtonColor: '#d85d53'
+        });
+        return;
+      }
+
+      Swal.fire({
+        icon: 'success',
+        title: 'Message sent!',
+        text: 'Thanks for contacting PicPitik. We will reach out soon.',
+        confirmButtonColor: '#d85d53'
+      });
+
+      form.reset();
+      form.classList.remove('was-validated');
+    });
+  </script>
+</body>
+</html>
